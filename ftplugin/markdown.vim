@@ -433,6 +433,7 @@ function! s:InsertToc(format, ...)
     endif
 
     let l:marker_character = '-'
+    let l:indent_space_count = 4
 
     let l:h2_count = 0
     for header in l:header_list
@@ -455,7 +456,7 @@ function! s:InsertToc(format, ...)
                 let l:marker = l:h2_count . '. '
             endif
         else
-            let l:indent = repeat(' ', l:max_h2_number_len + 2 * (l:level - 2))
+            let l:indent = repeat(' ', l:max_h2_number_len + l:indent_space_count * (l:level - 2))
             let l:marker = l:marker_character .. ' '
         endif
         let l:text = '[' . header.text . ']'
