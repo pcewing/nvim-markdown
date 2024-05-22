@@ -432,6 +432,8 @@ function! s:InsertToc(format, ...)
         let l:max_h2_number_len = 0
     endif
 
+    let l:marker_character = '-'
+
     let l:h2_count = 0
     for header in l:header_list
         let l:level = header.level
@@ -445,7 +447,7 @@ function! s:InsertToc(format, ...)
             " list of level-2 headers can be bullets or numbers
             if a:format ==# 'bullets'
                 let l:indent = ''
-                let l:marker = '* '
+                let l:marker = l:marker_character .. ' '
             else
                 let l:h2_count += 1
                 let l:number_len = strlen(string(l:h2_count))
@@ -454,7 +456,7 @@ function! s:InsertToc(format, ...)
             endif
         else
             let l:indent = repeat(' ', l:max_h2_number_len + 2 * (l:level - 2))
-            let l:marker = '* '
+            let l:marker = l:marker_character .. ' '
         endif
         let l:text = '[' . header.text . ']'
         let l:link = '(#' . substitute(tolower(header.text), '\v[ ]+', '-', 'g') . ')'
